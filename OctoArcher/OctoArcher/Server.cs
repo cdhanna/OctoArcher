@@ -18,36 +18,17 @@ namespace OctoArcher
             listener = new TcpListener(IPAddress.Parse(NetProp.SERVER_IP), NetProp.PORT);
             listener.Start();
 
-            for (int i = 0; i < 5; i++)
-            {
-                Thread t = new Thread(new ThreadStart(Handler));
-                t.Start();
-            }
-        }
+            ViewListener model;
 
-        public static void Handler()
-        {
             while (true)
             {
                 Socket socket = listener.AcceptSocket();
                 Console.WriteLine("Received connection from " + socket.RemoteEndPoint);
 
-                try
-                {
-                    Stream s = new NetworkStream(socket);
-                    StreamReader reader = new StreamReader(s);
-                    StreamWriter writer = new StreamWriter(s);
-
-                    writer.AutoFlush = true;
-                    writer.WriteLine("Hello from 192.168.1.11");
-
-                    s.Close();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
+                ViewProxy viewProxy = new ViewProxy(socket);
+                viewProxy.Model = model;
             }
+            
         }
     }
 }
