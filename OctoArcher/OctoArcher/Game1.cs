@@ -19,11 +19,15 @@ namespace OctoArcher
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        World world;
+
         public Game1()
             : base()
         {
+            
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Player.initContent(Content);
         }
 
         /// <summary>
@@ -36,6 +40,16 @@ namespace OctoArcher
         {
             // TODO: Add your initialization logic here
 
+            world = new World();
+
+            Player p = new Player(1);
+            p.X = 100;
+            p.Y = 100;
+            p.dX = 1;
+            p.dY = 0;
+
+            world.playerMoving(p);
+
             base.Initialize();
         }
 
@@ -47,7 +61,7 @@ namespace OctoArcher
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -70,7 +84,7 @@ namespace OctoArcher
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            world.update(gameTime);
 
             base.Update(gameTime);
         }
@@ -83,7 +97,7 @@ namespace OctoArcher
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            world.draw(spriteBatch);
 
             base.Draw(gameTime);
         }
