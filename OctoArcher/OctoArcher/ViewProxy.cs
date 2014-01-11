@@ -66,5 +66,12 @@ namespace OctoArcher
             Console.WriteLine("Sending command e");
             writer.WriteLine("e");
         }
+
+
+        public void playerRemoved(Player p)
+        {
+            Console.WriteLine("Sending command r");
+            writer.WriteLine("r {0}", p.Id);
+        }
     }
 }

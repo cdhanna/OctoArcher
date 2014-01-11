@@ -17,7 +17,8 @@ namespace OctoArcher
 
         public void makeMove(Player p, float dx, float dy)
         {
-            throw new NotImplementedException();
+            idPlayerTable[p.Id].dX = dx;
+            idPlayerTable[p.Id].dY = dy;
         }
 
         public void addPlayer(Player p)
@@ -29,6 +30,8 @@ namespace OctoArcher
         {
             views.Add(view);
             humans.Add(player);
+
+            idPlayerTable[player.Id] = player;
         }
 
         public void removePlayer(Player p)
@@ -36,9 +39,9 @@ namespace OctoArcher
             if (humans.Contains(p))
             {
                 humans.Remove(p);
-                for (ModelListener view in views)
+                foreach (ModelListener view in views)
                 {
-                    view.
+                    view.playerRemoved(p);
                 }
             }
         }
