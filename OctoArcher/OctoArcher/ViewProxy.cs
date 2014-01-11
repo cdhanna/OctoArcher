@@ -41,10 +41,8 @@ namespace OctoArcher
                     switch (cmd[0])
                     {
                         case "m":
-                            break;
-                        case "s":
-                            break;
-                        case "e":
+                            Player p = new Player(int.Parse(cmd[1]));
+                            model.makeMove(p, float.Parse(cmd[2]), float.Parse(cmd[3]));
                             break;
                     }
                 }
