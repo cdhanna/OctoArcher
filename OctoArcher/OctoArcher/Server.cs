@@ -14,7 +14,7 @@ namespace OctoArcher
 
         public static void Main()
         {
-            listener = new TcpListener(1025);
+            listener = new TcpListener(4862);
             listener.Start();
 
             while (true)

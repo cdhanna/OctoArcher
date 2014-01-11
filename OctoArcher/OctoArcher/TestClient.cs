@@ -27,7 +27,7 @@ namespace OctoArcher
         public TestClient()
         {
             this.ip = "192.168.1.11";
-            this.port = 1025;
+            this.port = 4862;
             this.client = new TcpClient(ip, port);
 
         }
