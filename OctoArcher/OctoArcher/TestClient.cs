@@ -7,10 +7,16 @@ using System.Net.Sockets;
 
 namespace OctoArcher
 {
+    /// <summary>
+    /// Pretty much copied code from http://www.codeproject.com/Articles/10649/An-Introduction-to-Socket-Programming-in-NET-using
+    /// To create a simple test client. that is currently hardcoded to 192.168.1.11:1025
+    /// </summary>
     class TestClient
     {
 
-
+        private string ip;
+        private int port;
+        private TcpClient client;
 
         /// <summary>
         /// hard coded with
@@ -20,10 +26,17 @@ namespace OctoArcher
         /// </summary>
         public TestClient()
         {
-            string ip = "192.168.1.11";
-            int port = 1025;
-            TcpClient client = new TcpClient(ip, port);
+            this.ip = "192.168.1.11";
+            this.port = 1025;
+            this.client = new TcpClient(ip, port);
 
+        }
+
+        /// <summary>
+        /// Start listening forever at the ip and port. Print out stuff to Console until there is no more stuff to print
+        /// </summary>
+        public void startListening()
+        {
             try
             {
                 Stream s = client.GetStream();
@@ -51,5 +64,6 @@ namespace OctoArcher
             } 
 
         }
+
     }
 }
