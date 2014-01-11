@@ -20,6 +20,7 @@ namespace OctoArcher
         SpriteBatch spriteBatch;
 
         World world;
+        ModelProxy modelProxy;
 
         public Game1()
             : base()
@@ -38,9 +39,12 @@ namespace OctoArcher
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
+            modelProxy = new ModelProxy(NetProp.SERVER_IP, NetProp.PORT);
             world = new World();
+
+            modelProxy.View = world;
+
 
             Player p = new Player(1);
             p.X = 100;
@@ -48,7 +52,7 @@ namespace OctoArcher
             p.dX = 1;
             p.dY = 0;
 
-            world.playerMoving(p);
+            modelProxy.addPlayer(p);
 
             base.Initialize();
         }

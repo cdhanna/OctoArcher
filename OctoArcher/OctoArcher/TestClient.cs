@@ -24,6 +24,7 @@ namespace OctoArcher
             Console.WriteLine("LAUNCHING CLIENT");
 
             TestClient c = new TestClient();
+            
             Console.WriteLine("CLIENT CREATED AND ENTERING LISTENING LOOP");
 
             c.startListening();
@@ -46,7 +47,7 @@ namespace OctoArcher
             this.ip = NetProp.SERVER_IP;
             this.port = NetProp.PORT;
             this.client = new TcpClient(ip, port);
-
+            
         }
 
         /// <summary>

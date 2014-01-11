@@ -10,16 +10,21 @@ namespace OctoArcher
 {
     class ModelProxy : ViewListener
     {
-        private Socket socket;
+        private TcpClient tcp;
         private StreamReader reader;
         private StreamWriter writer;
 
         public ModelListener View { get; set; }
 
-        public ModelProxy(Socket socket)
+        /// <summary>
+        /// Create a ModelProxy. The constructor will connect to the server if possible.
+        /// </summary>
+        /// <param name="ipAddress"> ip of the server to joint</param>
+        /// <param name="port"> port on the server </param>
+        public ModelProxy(String ipAddress, int port)
         {
-            this.socket = socket;
-            Stream s = new NetworkStream(socket);
+            this.tcp = new TcpClient(ipAddress, port);
+            Stream s = this.tcp.GetStream();
             this.reader = new StreamReader(s);
             this.writer = new StreamWriter(s);
             this.startListener();
