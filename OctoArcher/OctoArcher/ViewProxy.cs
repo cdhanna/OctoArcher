@@ -47,6 +47,7 @@ namespace OctoArcher
                     }
                 }
             });
+            readerThread.Start();
         }
 
         public void playerMoving(Player p)

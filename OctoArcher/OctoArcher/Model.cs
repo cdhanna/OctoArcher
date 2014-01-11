@@ -37,6 +37,8 @@ namespace OctoArcher
         public void addPlayer(Player p)
         {
             computers.Add(p);
+            idPlayerTable[p.Id] = p;
+
             foreach (ModelListener view in views)
             {
                 view.playerMoving(p);
@@ -84,13 +86,19 @@ namespace OctoArcher
         internal void updateComputers()
         {
             Random rand = new Random();
-
+            
             foreach (Player p in computers)
             {
                 if (rand.NextDouble() > .15)
                 {
-                    p.dX = rand.Next(-1, 1);
-                    p.dY = rand.Next(-1, 1);
+                    p.updateFromServer(Environment.TickCount);
+                    //p.dX = rand.Next(-1, 1);
+                    //p.dY = rand.Next(-1, 1);
+
+                    foreach (ModelListener view in views)
+                    {
+                        //view.playerMoving(p);
+                    }
                 }
             }
         }

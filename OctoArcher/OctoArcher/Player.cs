@@ -38,12 +38,26 @@ namespace OctoArcher
         public void update(GameTime time)
         {
             double currentMilliUpdate = time.TotalGameTime.TotalMilliseconds;
-            double deltaMilliTime = (currentMilliUpdate - lastMilliUpdate)/100;
+            double deltaMilliTime = (currentMilliUpdate - lastMilliUpdate) / 100;
 
-            X += dX * (float)deltaMilliTime;
-            Y += dY * (float)deltaMilliTime;
+            update((int)deltaMilliTime);
 
             this.lastMilliUpdate = time.TotalGameTime.TotalMilliseconds;
+        }
+
+
+        int lastElapsedUpdate = 0;
+        public void updateFromServer(int elapsed)
+        {
+            int msDelta = elapsed - lastElapsedUpdate;
+            update(msDelta / 100);
+            lastElapsedUpdate = elapsed;
+        }
+
+        public void update(int msDelta)
+        {
+            X += dX * (float)msDelta;
+            Y += dY * (float)msDelta;
         }
 
         /// <summary>
