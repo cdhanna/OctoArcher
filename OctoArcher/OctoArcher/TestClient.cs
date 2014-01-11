@@ -7,12 +7,29 @@ using System.Net.Sockets;
 
 namespace OctoArcher
 {
+
     /// <summary>
     /// Pretty much copied code from http://www.codeproject.com/Articles/10649/An-Introduction-to-Socket-Programming-in-NET-using
     /// To create a simple test client. that is currently hardcoded to 192.168.1.11:1025
     /// </summary>
     class TestClient
     {
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Console.WriteLine("LAUNCHING CLIENT");
+
+            TestClient c = new TestClient();
+            Console.WriteLine("CLIENT CREATED AND ENTERING LISTENING LOOP");
+
+            c.startListening();
+            Console.WriteLine("CLIENT STOPPED");
+
+        }
 
         private string ip;
         private int port;
@@ -26,8 +43,8 @@ namespace OctoArcher
         /// </summary>
         public TestClient()
         {
-            this.ip = "192.168.1.11";
-            this.port = 1025;
+            this.ip = NetProp.SERVER_IP;
+            this.port = NetProp.PORT;
             this.client = new TcpClient(ip, port);
 
         }
@@ -50,6 +67,7 @@ namespace OctoArcher
                     string name = Console.ReadLine();
                     sw.WriteLine(name);
                     if (name == "") break;
+                    
                     Console.WriteLine(sr.ReadLine());
                 }
                 s.Close();
