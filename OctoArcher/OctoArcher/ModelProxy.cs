@@ -36,7 +36,7 @@ namespace OctoArcher
                     string[] cmd = command.Split(' ');
                     switch (cmd[0])
                     {
-                        case "m":
+                        case "m": //moved
                             Player p = new Player(int.Parse(cmd[1]));
                             p.X = int.Parse(cmd[2]);
                             p.Y = int.Parse(cmd[3]);
@@ -44,14 +44,15 @@ namespace OctoArcher
                             p.dY = int.Parse(cmd[5]);
                             View.playerMoving(p);
                             break;
-                        case "s":
+                        case "s": //game start
                             View.startGame();
                             break;
-                        case "e":
+                        case "e": // game end
                             View.endGame();
                             break;
-                        case "r":
-
+                        case "r": // player removed
+                            Player pr = new Player(int.Parse(cmd[1]));
+                            View.playerRemoved(pr);
                             break;
                     }
                 }
