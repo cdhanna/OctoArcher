@@ -54,7 +54,10 @@ namespace OctoArcher
 
             foreach (ModelListener v in views)
             {
-                v.playerMoving(player);
+                if (v != view)
+                {
+                    v.playerMoving(player);
+                }
             }
         }
 
@@ -92,12 +95,12 @@ namespace OctoArcher
                 if (rand.NextDouble() > .15)
                 {
                     p.updateFromServer(Environment.TickCount);
-                    //p.dX = rand.Next(-1, 1);
-                    //p.dY = rand.Next(-1, 1);
+                    p.dX = rand.Next(-1, 1);
+                    p.dY = rand.Next(-1, 1);
 
                     foreach (ModelListener view in views)
                     {
-                        //view.playerMoving(p);
+                        view.playerMoving(p);
                     }
                 }
             }

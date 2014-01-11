@@ -65,6 +65,7 @@ namespace OctoArcher
                 }
             });
             readerThread.Start();
+            
         }
 
 

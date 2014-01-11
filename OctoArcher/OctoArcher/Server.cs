@@ -53,6 +53,8 @@ namespace OctoArcher
                 viewProxy.Model = model;
 
                 Player player = new Player(model.getNextPlayerId());
+                player.X = rand.Next(100, 500);
+                player.Y = rand.Next(100, 500);
 
                 model.addModelListener(viewProxy, player);
             }
