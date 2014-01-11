@@ -39,8 +39,9 @@ namespace OctoArcher
         {
             double currentMilliUpdate = time.TotalGameTime.TotalMilliseconds;
             double deltaMilliTime = (currentMilliUpdate - lastMilliUpdate) / 100;
+            Console.WriteLine(deltaMilliTime);
 
-            update((int)deltaMilliTime);
+            update((float)deltaMilliTime);
 
             this.lastMilliUpdate = time.TotalGameTime.TotalMilliseconds;
         }
@@ -50,14 +51,14 @@ namespace OctoArcher
         public void updateFromServer(int elapsed)
         {
             int msDelta = elapsed - lastElapsedUpdate;
-            update(msDelta / 100);
+            update(msDelta / 100f);
             lastElapsedUpdate = elapsed;
         }
 
-        public void update(int msDelta)
+        public void update(float msDelta)
         {
-            X += dX * (float)msDelta;
-            Y += dY * (float)msDelta;
+            X += dX * msDelta;
+            Y += dY * msDelta;
         }
 
         /// <summary>
