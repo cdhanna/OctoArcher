@@ -13,13 +13,14 @@ namespace OctoArcher
 
         private List<ModelListener> views;
 
-        public Dictionary<int, Player> IdPlayerTable { get; }
+        public Dictionary<int, Player> IdPlayerTable { get { return idPlayerTable; } }
 
         public Model()
         {
             this.idPlayerTable = new Dictionary<int, Player>();
             this.humans = new List<Player>();
             this.computers = new List<Player>();
+            this.views = new List<ModelListener>();
         }
 
         public void makeMove(Player p, float dx, float dy)
@@ -53,6 +54,31 @@ namespace OctoArcher
             }
         }
 
+        public int getNextPlayerId()
+        {
+            int min = 0;
+            while (true)
+            {
+                if (!idPlayerTable.ContainsKey(min))
+                {
+                    return min;
+                }
+                min++;
+            }
+        }
 
+        internal void updateComputers()
+        {
+            Random rand = new Random();
+
+            foreach (Player p in computers)
+            {
+                if (rand.NextDouble() > .15)
+                {
+                    p.dX = rand.Next(-1, 1);
+                    p.dY = rand.Next(-1, 1);
+                }
+            }
+        }
     }
 }
