@@ -50,6 +50,9 @@ namespace OctoArcher
                         case "e":
                             View.endGame();
                             break;
+                        case "r":
+
+                            break;
                     }
                 }
             });
@@ -65,12 +68,14 @@ namespace OctoArcher
 
         public void addPlayer(Player p)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ModelProxy Sending command a {0} {1} {2} {3} {4}", p.Id, p.X, p.Y, p.dX, p.dY);
+            writer.WriteLine("a {0} {1} {2} {3} {4}", p.Id, p.X, p.Y, p.dX, p.dY);
         }
 
         public void removePlayer(Player p)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ModelProxy Sending command r {0}", p.Id);
+            writer.WriteLine("r {0}", p.Id);
         }
     }
 }
