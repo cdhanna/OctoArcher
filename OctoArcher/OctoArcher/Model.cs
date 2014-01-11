@@ -13,7 +13,14 @@ namespace OctoArcher
 
         private List<ModelListener> views;
 
+        public Dictionary<int, Player> IdPlayerTable { get; }
 
+        public Model()
+        {
+            this.idPlayerTable = new Dictionary<int, Player>();
+            this.humans = new List<Player>();
+            this.computers = new List<Player>();
+        }
 
         public void makeMove(Player p, float dx, float dy)
         {
@@ -45,5 +52,7 @@ namespace OctoArcher
                 }
             }
         }
+
+
     }
 }

@@ -10,11 +10,11 @@ namespace OctoArcher
     class World : ModelListener
     {
 
-        private ViewListener model;
+        private Model model;
 
         public World()
         {
-
+            model = new Model();
         }
 
 
@@ -35,14 +35,14 @@ namespace OctoArcher
             //this.idPlayerTable[p.Id].dY = dy;
 
            // this.idPlayerTable[p.Id] = p;
-            this.idPlayerTable.Add(p.Id, p);
+            this.model.IdPlayerTable.Add(p.Id, p);
         }
 
         public void playerRemoved(Player p)
         {
-            if (this.idPlayerTable.ContainsKey(p.Id))
+            if (this.model.IdPlayerTable.ContainsKey(p.Id))
             {
-                this.idPlayerTable.Remove(p.Id);
+                this.model.IdPlayerTable.Remove(p.Id);
             }
         }
 
@@ -62,7 +62,7 @@ namespace OctoArcher
         /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
-            foreach (Player p in this.idPlayerTable.Values)
+            foreach (Player p in this.model.IdPlayerTable.Values)
             {
                 p.update(gameTime);
             }
@@ -75,7 +75,7 @@ namespace OctoArcher
         public void draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            foreach (Player p in this.idPlayerTable.Values)
+            foreach (Player p in this.model.IdPlayerTable.Values)
             {
                 p.draw(spriteBatch);
             }
