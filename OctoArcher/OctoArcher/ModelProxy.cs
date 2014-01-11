@@ -8,13 +8,13 @@ using System.Threading;
 
 namespace OctoArcher
 {
-    class ModelProxy
+    class ModelProxy : ViewListener
     {
         private Socket socket;
         private StreamReader reader;
 
 
-        public ModelListener Model { get; set; }
+        public ModelListener View { get; set; }
 
         public ModelProxy(Socket socket)
         {
@@ -37,10 +37,18 @@ namespace OctoArcher
                     switch (cmd[0])
                     {
                         case "m":
+                            Player p = new Player(int.Parse(cmd[1]));
+                            p.X = int.Parse(cmd[2]);
+                            p.Y = int.Parse(cmd[3]);
+                            p.dX = int.Parse(cmd[4]);
+                            p.dY = int.Parse(cmd[5]);
+                            View.playerMoving(p);
                             break;
                         case "s":
+                            View.startGame();
                             break;
                         case "e":
+                            View.endGame();
                             break;
                     }
                 }
@@ -48,5 +56,20 @@ namespace OctoArcher
         }
 
 
+
+        public void makeMove(Player p, float dx, float dy)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addPlayer(Player p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void removePlayer(Player p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
