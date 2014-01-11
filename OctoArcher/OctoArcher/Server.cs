@@ -14,10 +14,10 @@ namespace OctoArcher
 
         public static void Main()
         {
-            listener = new TcpListener(4862);
+            listener = new TcpListener(NetProp.SERVER_IP, NetProp.PORT);
             listener.Start();
 
-            while (true)
+            for (int i = 0; i < 5; i++)
             {
                 Thread t = new Thread(new ThreadStart(Handler));
                 t.Start();
@@ -26,25 +26,27 @@ namespace OctoArcher
 
         public static void Handler()
         {
-            Socket socket = listener.AcceptSocket();
-            Console.WriteLine("Received connection from " + socket.RemoteEndPoint);
-
-            try
+            while (true)
             {
-                Stream s = new NetworkStream(socket);
-                StreamReader reader = new StreamReader(s);
-                StreamWriter writer = new StreamWriter(s);
+                Socket socket = listener.AcceptSocket();
+                Console.WriteLine("Received connection from " + socket.RemoteEndPoint);
 
-                writer.AutoFlush = true;
-                writer.WriteLine("Hello from 192.168.1.11");
+                try
+                {
+                    Stream s = new NetworkStream(socket);
+                    StreamReader reader = new StreamReader(s);
+                    StreamWriter writer = new StreamWriter(s);
 
-                s.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
+                    writer.AutoFlush = true;
+                    writer.WriteLine("Hello from 192.168.1.11");
+
+                    s.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
         }
-
     }
 }
