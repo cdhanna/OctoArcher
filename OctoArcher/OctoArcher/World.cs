@@ -10,11 +10,10 @@ namespace OctoArcher
     class World : ModelListener
     {
 
-        private Dictionary<int, Player> idPlayerTable;
+        private ViewListener model;
 
         public World()
         {
-            this.idPlayerTable = new Dictionary<int, Player>();
 
         }
 
