@@ -27,11 +27,20 @@ namespace OctoArcher
         {
             idPlayerTable[p.Id].dX = dx;
             idPlayerTable[p.Id].dY = dy;
+
+            foreach (ModelListener view in views)
+            {
+                view.playerMoving(p);
+            }
         }
 
         public void addPlayer(Player p)
         {
             computers.Add(p);
+            foreach (ModelListener view in views)
+            {
+                view.playerMoving(p);
+            }
         }
 
         public void addModelListener(ModelListener view, Player player)
@@ -40,6 +49,11 @@ namespace OctoArcher
             humans.Add(player);
 
             idPlayerTable[player.Id] = player;
+
+            foreach (ModelListener v in views)
+            {
+                v.playerMoving(player);
+            }
         }
 
         public void removePlayer(Player p)
