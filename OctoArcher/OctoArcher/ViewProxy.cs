@@ -31,28 +31,36 @@ namespace OctoArcher
         {
             Thread readerThread = new Thread(() =>
             {
-                while (true)
+                try
                 {
-                    string command = reader.ReadLine();
-                    Console.WriteLine("Received command {0} from client", command);
-
-                    string[] cmd = command.Split(' ');
-
-                    switch (cmd[0])
+                    while (true)
                     {
-                        case "m":
-                            Player p = new Player(int.Parse(cmd[1]));
-                            model.makeMove(p, float.Parse(cmd[2]), float.Parse(cmd[3]));
-                            break;
-                        case "a":
-                            Player pa = new Player(int.Parse(cmd[1]));
-                            pa.X = int.Parse(cmd[2]);
-                            pa.Y = int.Parse(cmd[3]);
-                            pa.dX = int.Parse(cmd[4]);
-                            pa.dX = int.Parse(cmd[5]);
-                            break;
+                        string command = reader.ReadLine();
+                        Console.WriteLine("Received command {0} from client", command);
 
+                        string[] cmd = command.Split(' ');
+
+                        switch (cmd[0])
+                        {
+                            case "m":
+                                Player p = new Player(int.Parse(cmd[1]));
+                                model.makeMove(p, float.Parse(cmd[2]), float.Parse(cmd[3]));
+                                break;
+                            case "a":
+                                Player pa = new Player(int.Parse(cmd[1]));
+                                pa.X = int.Parse(cmd[2]);
+                                pa.Y = int.Parse(cmd[3]);
+                                pa.dX = int.Parse(cmd[4]);
+                                pa.dY = int.Parse(cmd[5]);
+                                model.makeMove(pa, pa.dX, pa.dY);
+                                break;
+
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    // Ignore 
                 }
             });
             readerThread.Start();
