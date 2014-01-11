@@ -48,8 +48,8 @@ namespace OctoArcher
 
             Player p = new Player(1);
             p.X = 100;
-            p.Y = 100;
-            p.dX = 1;
+            p.Y = 300;
+            p.dX = 2;
             p.dY = 0;
 
             modelProxy.addPlayer(p);
@@ -89,7 +89,7 @@ namespace OctoArcher
                 Exit();
 
             world.update(gameTime);
-
+            ///Console.WriteLine("update");
             base.Update(gameTime);
         }
 
