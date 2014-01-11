@@ -48,10 +48,10 @@ namespace OctoArcher
                                 break;
                             case "a":
                                 Player pa = new Player(int.Parse(cmd[1]));
-                                pa.X = int.Parse(cmd[2]);
-                                pa.Y = int.Parse(cmd[3]);
-                                pa.dX = int.Parse(cmd[4]);
-                                pa.dY = int.Parse(cmd[5]);
+                                pa.X = float.Parse(cmd[2]);
+                                pa.Y = float.Parse(cmd[3]);
+                                pa.dX = float.Parse(cmd[4]);
+                                pa.dY = float.Parse(cmd[5]);
                                 model.makeMove(pa, pa.dX, pa.dY);
                                 break;
 

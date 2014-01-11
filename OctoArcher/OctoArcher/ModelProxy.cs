@@ -13,7 +13,7 @@ namespace OctoArcher
         private TcpClient tcp;
         private StreamReader reader;
         private StreamWriter writer;
-
+        Thread readerThread;
         public ModelListener View { get; set; }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace OctoArcher
 
         private void startListener()
         {
-            Thread readerThread = new Thread(() =>
+            readerThread = new Thread(() =>
             {
                 while (true)
                 {
@@ -45,10 +45,10 @@ namespace OctoArcher
                     {
                         case "m": //moved
                             Player p = new Player(int.Parse(cmd[1]));
-                            p.X = int.Parse(cmd[2]);
-                            p.Y = int.Parse(cmd[3]);
-                            p.dX = int.Parse(cmd[4]);
-                            p.dY = int.Parse(cmd[5]);
+                            p.X = float.Parse(cmd[2]);
+                            p.Y = float.Parse(cmd[3]);
+                            p.dX = float.Parse(cmd[4]);
+                            p.dY = float.Parse(cmd[5]);
                             View.playerMoving(p);
                             break;
                         case "s": //game start
@@ -85,6 +85,13 @@ namespace OctoArcher
         {
             Console.WriteLine("ModelProxy Sending command r {0}", p.Id);
             writer.WriteLine("r {0}", p.Id);
+        }
+
+        public void shutdown()
+        {
+            this.tcp.Close();
+            this.readerThread.Abort();
+            
         }
     }
 }
