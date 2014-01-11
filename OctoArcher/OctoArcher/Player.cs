@@ -54,7 +54,7 @@ namespace OctoArcher
         {
             if (image != null)
             {
-                spriteBatch.Draw(image, new Vector2(X, Y), Color.Black);
+                spriteBatch.Draw(image, new Vector2(X, Y), null, Color.Black, 0, Vector2.Zero, .2f * Vector2.One, SpriteEffects.None, 0);
             }
         }
 
