@@ -21,6 +21,7 @@ namespace OctoArcher
 
         World world;
         ModelProxy modelProxy;
+        Server server;
 
         public Game1()
             : base()
@@ -39,6 +40,8 @@ namespace OctoArcher
         /// </summary>
         protected override void Initialize()
         {
+            server = new Server();
+
 
             modelProxy = new ModelProxy(NetProp.SERVER_IP, NetProp.PORT);
             world = new World();
@@ -76,6 +79,7 @@ namespace OctoArcher
         protected override void UnloadContent()
         {
             modelProxy.shutdown();
+            server.shutdown();
         }
 
         /// <summary>

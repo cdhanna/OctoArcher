@@ -11,9 +11,19 @@ namespace OctoArcher
 {
     class Server
     {
-        static TcpListener listener;
+        
 
         public static void Main()
+        {
+            Server server = new Server();
+        }
+
+        private TcpListener listener;
+        private Thread mainServerThread;
+        private Thread aiUpdate;
+
+
+        public Server()
         {
             listener = new TcpListener(IPAddress.Parse(NetProp.SERVER_IP), NetProp.PORT);
             listener.Start();
@@ -33,7 +43,7 @@ namespace OctoArcher
                 model.addPlayer(p);
             }
 
-            Thread aiUpdate = new Thread(() =>
+            this.aiUpdate = new Thread(() =>
             {
                 while (true)
                 {
@@ -44,18 +54,31 @@ namespace OctoArcher
 
             aiUpdate.Start();
 
-            while (true)
-            {
-                Socket socket = listener.AcceptSocket();
-                Console.WriteLine("Received connection from " + socket.RemoteEndPoint);
+            this.mainServerThread = new Thread(() =>
+                {
+                    while (true)
+                    {
+                        Socket socket = listener.AcceptSocket();
+                        Console.WriteLine("SERVER: Received connection from " + socket.RemoteEndPoint);
 
-                ViewProxy viewProxy = new ViewProxy(socket);
-                viewProxy.Model = model;
+                        ViewProxy viewProxy = new ViewProxy(socket);
+                        viewProxy.Model = model;
 
-                Player player = new Player(model.getNextPlayerId());
+                        Player player = new Player(model.getNextPlayerId());
 
-                model.addModelListener(viewProxy, player);
-            }
+                        model.addModelListener(viewProxy, player);
+                    }
+                });
+            mainServerThread.Start();
+            
         }
+
+        public void shutdown()
+        {
+            this.mainServerThread.Abort();
+            this.aiUpdate.Abort();
+            this.listener.Stop();
+        }
+
     }
 }

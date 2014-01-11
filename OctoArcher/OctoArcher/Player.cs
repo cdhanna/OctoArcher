@@ -39,8 +39,7 @@ namespace OctoArcher
         {
             double currentMilliUpdate = time.TotalGameTime.TotalMilliseconds;
             double deltaMilliTime = (currentMilliUpdate - lastMilliUpdate) / 100;
-            Console.WriteLine(deltaMilliTime);
-
+           
             update((float)deltaMilliTime);
 
 
