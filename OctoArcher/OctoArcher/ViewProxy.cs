@@ -20,6 +20,8 @@ namespace OctoArcher
             Stream s = new NetworkStream(socket);
             reader = new StreamReader(s);
             writer = new StreamWriter(s);
+
+            writer.AutoFlush = true;
         }
 
         private ViewListener model;
@@ -36,7 +38,7 @@ namespace OctoArcher
 
                     string[] cmd = command.Split(' ');
 
-                    switch (cmd)
+                    switch (cmd[0])
                     {
                         case "m":
                             break;
