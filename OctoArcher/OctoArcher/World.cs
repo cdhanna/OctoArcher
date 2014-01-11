@@ -35,7 +35,9 @@ namespace OctoArcher
             //this.idPlayerTable[p.Id].dY = dy;
 
            // this.idPlayerTable[p.Id] = p;
-            this.model.IdPlayerTable.Add(p.Id, p);
+            //if (model.IdPlayerTable.ContainsKeyp.Id)
+            this.model.IdPlayerTable[p.Id] = p;
+            //this.model.IdPlayerTable.Add(p.Id, p);
         }
 
         public void playerRemoved(Player p)
@@ -62,8 +64,10 @@ namespace OctoArcher
         /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
-            foreach (Player p in this.model.IdPlayerTable.Values)
+            //foreach (Player p in this.model.IdPlayerTable.Values)
+            for (int i = 0; i < this.model.IdPlayerTable.Values.Count; i++ )
             {
+                Player p = this.model.IdPlayerTable.Values.ToList()[i];
                 p.update(gameTime);
             }
         }
@@ -75,8 +79,9 @@ namespace OctoArcher
         public void draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            foreach (Player p in this.model.IdPlayerTable.Values)
+            for (int i = 0; i < this.model.IdPlayerTable.Values.Count; i++)
             {
+                Player p = this.model.IdPlayerTable.Values.ToList()[i];
                 p.draw(spriteBatch);
             }
             spriteBatch.End();

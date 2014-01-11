@@ -44,9 +44,18 @@ namespace OctoArcher
                             Player p = new Player(int.Parse(cmd[1]));
                             model.makeMove(p, float.Parse(cmd[2]), float.Parse(cmd[3]));
                             break;
+                        case "a":
+                            Player pa = new Player(int.Parse(cmd[1]));
+                            pa.X = int.Parse(cmd[2]);
+                            pa.Y = int.Parse(cmd[3]);
+                            pa.dX = int.Parse(cmd[4]);
+                            pa.dX = int.Parse(cmd[5]);
+                            break;
+
                     }
                 }
             });
+            readerThread.Start();
         }
 
         public void playerMoving(Player p)

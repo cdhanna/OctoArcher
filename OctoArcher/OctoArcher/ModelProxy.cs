@@ -27,6 +27,8 @@ namespace OctoArcher
             Stream s = this.tcp.GetStream();
             this.reader = new StreamReader(s);
             this.writer = new StreamWriter(s);
+
+            writer.AutoFlush = true;
             this.startListener();
         }
 
@@ -62,6 +64,7 @@ namespace OctoArcher
                     }
                 }
             });
+            readerThread.Start();
         }
 
 
