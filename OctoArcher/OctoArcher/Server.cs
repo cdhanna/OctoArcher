@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -14,7 +15,7 @@ namespace OctoArcher
 
         public static void Main()
         {
-            listener = new TcpListener(NetProp.SERVER_IP, NetProp.PORT);
+            listener = new TcpListener(IPAddress.Parse(NetProp.SERVER_IP), NetProp.PORT);
             listener.Start();
 
             for (int i = 0; i < 5; i++)

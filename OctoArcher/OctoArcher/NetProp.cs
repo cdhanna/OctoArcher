@@ -5,10 +5,11 @@ using System.Text;
 
 namespace OctoArcher
 {
-    class NetProp
+    static class NetProp
     {
-        public static const string SERVER_IP = "192.168.1.11";
-        public static const int PORT = 4862;
+        public const string SERVER_IP = "192.168.1.11";
+
+        public const int PORT = 4862;
 
 
     }
