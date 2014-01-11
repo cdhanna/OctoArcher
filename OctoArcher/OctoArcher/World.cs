@@ -39,6 +39,14 @@ namespace OctoArcher
             this.idPlayerTable.Add(p.Id, p);
         }
 
+        public void playerRemoved(Player p)
+        {
+            if (this.idPlayerTable.ContainsKey(p.Id))
+            {
+                this.idPlayerTable.Remove(p.Id);
+            }
+        }
+
         public void startGame()
         {
             //Start game

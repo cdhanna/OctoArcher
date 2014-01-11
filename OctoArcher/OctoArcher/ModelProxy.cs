@@ -12,7 +12,7 @@ namespace OctoArcher
     {
         private Socket socket;
         private StreamReader reader;
-
+        private StreamWriter writer;
 
         public ModelListener View { get; set; }
 
@@ -21,7 +21,7 @@ namespace OctoArcher
             this.socket = socket;
             Stream s = new NetworkStream(socket);
             this.reader = new StreamReader(s);
-
+            this.writer = new StreamWriter(s);
             this.startListener();
         }
 
@@ -50,6 +50,9 @@ namespace OctoArcher
                         case "e":
                             View.endGame();
                             break;
+                        case "r":
+
+                            break;
                     }
                 }
             });
@@ -59,17 +62,20 @@ namespace OctoArcher
 
         public void makeMove(Player p, float dx, float dy)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ModelProxy Sending command m {0} {1} {2}", p.Id, p.X, p.Y);
+            writer.WriteLine("m {0} {1} {2}", p.Id, p.X, p.Y);
         }
 
         public void addPlayer(Player p)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ModelProxy Sending command a {0} {1} {2} {3} {4}", p.Id, p.X, p.Y, p.dX, p.dY);
+            writer.WriteLine("a {0} {1} {2} {3} {4}", p.Id, p.X, p.Y, p.dX, p.dY);
         }
 
         public void removePlayer(Player p)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ModelProxy Sending command r {0}", p.Id);
+            writer.WriteLine("r {0}", p.Id);
         }
     }
 }
