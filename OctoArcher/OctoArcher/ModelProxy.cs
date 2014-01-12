@@ -63,6 +63,15 @@ namespace OctoArcher
                             pr.Id = int.Parse(cmd[1]);
                             View.playerRemoved(pr);
                             break;
+                        case NetProp.PLAYER_CREATED:
+                            Player np = new Player();
+                            np.Id = int.Parse(cmd[1]);
+                            np.X = float.Parse(cmd[2]);
+                            np.Y = float.Parse(cmd[3]);
+                            np.dX = float.Parse(cmd[4]);
+                            np.dY = float.Parse(cmd[5]);
+                            View.playerCreated(np);
+                            break;
                     }
                 }
             });
@@ -75,7 +84,7 @@ namespace OctoArcher
         {
             //Console.WriteLine("ModelProxy Sending command m {0} {1} {2}", p.Id, p.X, p.Y);
             //writer.WriteLine("m {0} {1} {2}", p.Id, p.X, p.Y);
-            sendData(NetProp.MOVE_PLAYER, p.Id, p.X, p.Y);
+            sendData(NetProp.MOVE_PLAYER, p.Id, dx, dy);
         }
 
         public void addPlayer(Player p)

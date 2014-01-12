@@ -57,6 +57,12 @@ namespace OctoArcher
 
             modelProxy.addPlayer(p);
 
+            p = world.waitForPlayer();
+
+            Console.WriteLine("I GOT A PLAYER!!!: {0} ", p.Id);
+
+            modelProxy.makeMove(p, 0, 1);
+
             base.Initialize();
         }
 

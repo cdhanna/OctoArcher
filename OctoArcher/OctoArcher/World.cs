@@ -58,6 +58,22 @@ namespace OctoArcher
             //End game
         }
 
+        public void playerCreated(Player p)
+        {
+            Console.WriteLine("PLAYER ADDED: {0}", p.Id);
+            plr = p;
+        }
+
+        private Player plr = null;
+
+        public Player waitForPlayer()
+        {
+            while (plr == null)
+            {
+            }
+            return plr;
+        }
+
         /// <summary>
         /// Update all players position
         /// </summary>
@@ -88,6 +104,8 @@ namespace OctoArcher
 
 
         }
+
+
 
     }
 }

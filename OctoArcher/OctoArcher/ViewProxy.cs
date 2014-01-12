@@ -100,6 +100,11 @@ namespace OctoArcher
             sendData(NetProp.REMOVE_PLAYER, p.Id);
         }
 
+        public void playerCreated(Player p)
+        {
+            sendData(NetProp.PLAYER_CREATED, p.Id, p.X, p.Y, p.dX, p.dY);
+        }
+
         private void sendData(string commandType, params object[] data)
         {
             string s = commandType + " ";
@@ -112,5 +117,7 @@ namespace OctoArcher
 
         }
 
+
+  
     }
 }

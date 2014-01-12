@@ -30,7 +30,7 @@ namespace OctoArcher
 
             foreach (ModelListener view in views)
             {
-                view.playerMoving(p);
+                view.playerMoving(idPlayerTable[p.Id]);
             }
         }
 
@@ -42,7 +42,10 @@ namespace OctoArcher
 
             Console.WriteLine("MODEL: createHumanPlayer {0} {1}", p.Id, views.Count);
             foreach (ModelListener view in views)
+            {
+                view.playerCreated(p);
                 view.playerMoving(p);
+            }
 
         }
 
