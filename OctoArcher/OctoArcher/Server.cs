@@ -31,9 +31,10 @@ namespace OctoArcher
             Model model = new Model();
 
             Random rand = new Random();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 00; i++)
             {
-                Player p = new Player(model.getNextPlayerId());
+                Player p = new Player();
+                p.Id = model.getNextPlayerId();
                 p.X = rand.Next(100, 500);
                 p.Y = rand.Next(100, 500);
 
@@ -64,9 +65,9 @@ namespace OctoArcher
                         ViewProxy viewProxy = new ViewProxy(socket);
                         viewProxy.Model = model;
 
-                        Player player = new Player(model.getNextPlayerId());
-
-                        model.addModelListener(viewProxy, player);
+                        //Player player = new Player();
+                        //player.Id = model.getNextPlayerId();
+                        model.addModelListener(viewProxy);
                     }
                 });
             mainServerThread.Start();

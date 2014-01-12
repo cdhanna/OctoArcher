@@ -34,6 +34,18 @@ namespace OctoArcher
             }
         }
 
+        public void createHumanPlayer(Player p)
+        {
+            if (p.Id == Player.ID_UNSET)
+                p.Id = this.getNextPlayerId();
+            idPlayerTable[p.Id] = p;
+
+            Console.WriteLine("MODEL: createHumanPlayer {0} {1}", p.Id, views.Count);
+            foreach (ModelListener view in views)
+                view.playerMoving(p);
+
+        }
+
         public void addPlayer(Player p)
         {
             computers.Add(p);
@@ -45,16 +57,16 @@ namespace OctoArcher
             }
         }
 
-        public void addModelListener(ModelListener view, Player player)
+        public void addModelListener(ModelListener view)
         {
             views.Add(view);
-            humans.Add(player);
+           // humans.Add(player);
 
-            idPlayerTable[player.Id] = player;
+           // idPlayerTable[player.Id] = player;
 
             foreach (ModelListener v in views)
             {
-                v.playerMoving(player);
+                //v.playerMoving(player);
             }
         }
 

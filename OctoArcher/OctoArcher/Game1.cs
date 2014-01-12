@@ -49,7 +49,7 @@ namespace OctoArcher
             modelProxy.View = world;
 
 
-            Player p = new Player(1);
+            Player p = new Player();
             p.X = 100;
             p.Y = 300;
             p.dX = 2;
