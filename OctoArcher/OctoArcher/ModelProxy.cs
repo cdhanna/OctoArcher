@@ -78,7 +78,10 @@ namespace OctoArcher
             readerThread.Start();
         }
 
-
+        public void putPlayer(Player p, float x, float y)
+        {
+            sendData(NetProp.PUT_PLAYER, p.Id, x, y);
+        }
 
         public void makeMove(Player p, float dx, float dy)
         {

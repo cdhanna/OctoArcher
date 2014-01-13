@@ -22,6 +22,8 @@ namespace OctoArcher
         World world;
         ModelProxy modelProxy;
         Server server;
+        KeyboardHelper keyboard;
+        Player player;
 
         public Game1()
             : base()
@@ -30,6 +32,7 @@ namespace OctoArcher
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             Player.initContent(Content);
+            keyboard = new KeyboardHelper();
         }
 
         /// <summary>
@@ -49,20 +52,22 @@ namespace OctoArcher
             modelProxy.View = world;
 
 
-            Player p = new Player();
-            p.X = 100;
-            p.Y = 300;
-            p.dX = 2;
-            p.dY = 0;
+            
+            //p.X = 100;
+            //p.Y = 300;
+            //p.dX = 2;
+            //p.dY = 0;
+            //modelProxy.addPlayer(p);
 
-            modelProxy.addPlayer(p);
+            player = world.waitForPlayer();
 
-            p = world.waitForPlayer();
-
-            Console.WriteLine("I GOT A PLAYER!!!: {0} ", p.Id);
-
-            modelProxy.makeMove(p, 0, 1);
-
+            Console.WriteLine("I GOT A PLAYER!!!: {0} ", player.Id);
+            player.X = 50;
+            modelProxy.putPlayer(player, 50, 50);
+            
+            
+            modelProxy.makeMove(player, 0, 1);
+            //modelProxy.makeMove(player, 0, -1);
             base.Initialize();
         }
 
@@ -99,7 +104,23 @@ namespace OctoArcher
                 Exit();
 
             world.update(gameTime);
-            ///Console.WriteLine("update");
+
+            float dx = 0, dy = 0;
+            if (keyboard.NewKeyDown(Keys.Up))
+                dy += 1;
+            if (keyboard.NewKeyDown(Keys.Down))
+                dy -= 1;
+            if (keyboard.NewKeyDown(Keys.Right))
+                dx += 1;
+            if (keyboard.NewKeyDown(Keys.Left))
+                dx -= 1;
+            if (dx != 0 || dy != 0)
+            {
+                player.dX = dx;
+                player.dY = dy;
+                modelProxy.makeMove(player, dx, dy);
+            }
+            keyboard.Update();
             base.Update(gameTime);
         }
 

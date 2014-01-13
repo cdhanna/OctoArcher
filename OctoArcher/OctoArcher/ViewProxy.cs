@@ -41,25 +41,31 @@ namespace OctoArcher
                         Console.WriteLine("ViewProxy Received command {0} from client", command);
 
                         string[] cmd = command.Split(' ');
-
+                        Player p;
                         switch (cmd[0])
                         {
                             case NetProp.MOVE_PLAYER:
-                                Player p = new Player();
+                                p = new Player();
                                 p.Id = int.Parse(cmd[1]);
                                 model.makeMove(p, float.Parse(cmd[2]), float.Parse(cmd[3]));
                                 break;
                             case NetProp.ADD_PLAYER:
-                                Player pa = new Player();
-                                pa.Id = int.Parse(cmd[1]);
-                                pa.X = float.Parse(cmd[2]);
-                                pa.Y = float.Parse(cmd[3]);
-                                pa.dX = float.Parse(cmd[4]);
-                                pa.dY = float.Parse(cmd[5]);
-                                model.createHumanPlayer(pa);
-                                //model.makeMove(pa, pa.dX, pa.dY);
+                                p = new Player();
+                                p.Id = int.Parse(cmd[1]);
+                                p.X = float.Parse(cmd[2]);
+                                p.Y = float.Parse(cmd[3]);
+                                p.dX = float.Parse(cmd[4]);
+                                p.dY = float.Parse(cmd[5]);
+                                //model.createHumanPlayer(pa);
+                                model.makeMove(p, p.dX, p.dY);
                                 break;
-
+                            case NetProp.PUT_PLAYER:
+                                p = new Player();
+                                p.Id = int.Parse(cmd[1]);
+                                p.X = float.Parse(cmd[2]);
+                                p.Y = float.Parse(cmd[3]);
+                                model.putPlayer(p, p.X, p.Y);
+                                break;
                         }
                     }
                 }

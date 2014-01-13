@@ -65,13 +65,19 @@ namespace OctoArcher
                         ViewProxy viewProxy = new ViewProxy(socket);
                         viewProxy.Model = model;
 
-                        //Player player = new Player();
-                        //player.Id = model.getNextPlayerId();
-                        model.addModelListener(viewProxy);
+                        Player player = new Player();
+                        player.Id = model.getNextPlayerId();
+                        model.addModelListener(viewProxy, player);
+
+
+                        model.update();
                     }
                 });
             mainServerThread.Start();
             
+
+            
+
         }
 
         public void shutdown()
