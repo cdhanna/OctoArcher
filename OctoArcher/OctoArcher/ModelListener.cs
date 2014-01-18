@@ -10,6 +10,7 @@ namespace OctoArcher
     /// </summary>
     interface ModelListener
     {
+        void playerCreated(Player p);
         void playerMoving(Player p);
         void playerRemoved(Player p);
         void startGame();

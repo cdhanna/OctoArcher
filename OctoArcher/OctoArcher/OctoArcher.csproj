@@ -39,10 +39,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="ModelListener.cs" />
+    <Compile Include="ModelProxy.cs" />
+    <Compile Include="NetProp.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="TestClient.cs" />
+    <Compile Include="ViewListener.cs" />
+    <Compile Include="ViewProxy.cs" />
+    <Compile Include="World.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">

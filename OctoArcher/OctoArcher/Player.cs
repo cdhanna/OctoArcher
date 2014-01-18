@@ -10,7 +10,7 @@ namespace OctoArcher
 {
     class Player
     {
-
+        public const int ID_UNSET = -1;
         private static Texture2D image = null;
         public static void initContent(ContentManager content)
         {
@@ -26,9 +26,9 @@ namespace OctoArcher
         private double lastMilliUpdate = 0;
 
 
-        public Player(int id)
+        public Player()
         {
-            this.Id = id;
+            this.Id = Player.ID_UNSET;
         }
 
         /// <summary>
@@ -39,8 +39,7 @@ namespace OctoArcher
         {
             double currentMilliUpdate = time.TotalGameTime.TotalMilliseconds;
             double deltaMilliTime = (currentMilliUpdate - lastMilliUpdate) / 100;
-            Console.WriteLine(deltaMilliTime);
-
+           
             update((float)deltaMilliTime);
 
 

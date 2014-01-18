@@ -30,8 +30,33 @@ namespace OctoArcher
 
             foreach (ModelListener view in views)
             {
+                view.playerMoving(idPlayerTable[p.Id]);
+            }
+        }
+
+        public void putPlayer(Player p, float x, float y)
+        {
+            idPlayerTable[p.Id].X = x;
+            idPlayerTable[p.Id].Y = y;
+            foreach (ModelListener view in views)
+            {
+                view.playerMoving(idPlayerTable[p.Id]);
+            }
+        }
+
+        public void createHumanPlayer(Player p)
+        {
+            if (p.Id == Player.ID_UNSET)
+                p.Id = this.getNextPlayerId();
+            idPlayerTable[p.Id] = p;
+
+            Console.WriteLine("MODEL: createHumanPlayer {0} {1}", p.Id, views.Count);
+            foreach (ModelListener view in views)
+            {
+                view.playerCreated(p);
                 view.playerMoving(p);
             }
+
         }
 
         public void addPlayer(Player p)
@@ -52,6 +77,10 @@ namespace OctoArcher
 
             idPlayerTable[player.Id] = player;
 
+            //give the new view back their player
+            view.playerCreated(player);
+            
+            //inform everyone that a new player is around
             foreach (ModelListener v in views)
             {
                 if (v != view)
@@ -86,6 +115,14 @@ namespace OctoArcher
             }
         }
 
+        internal void update()
+        {
+            foreach (Player p in this.idPlayerTable.Values)
+            {
+                p.updateFromServer(Environment.TickCount);
+            }
+        }
+
         internal void updateComputers()
         {
             Random rand = new Random();
@@ -105,5 +142,7 @@ namespace OctoArcher
                 }
             }
         }
+
+        
     }
 }
